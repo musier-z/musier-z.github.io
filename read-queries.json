@@ -1,0 +1,10 @@
+[
+  "queries/leaderboards:getLeaderboard",
+  "queries/submissions:listTripReports",
+  "queries/submissions:listVehicleSpottings",
+  "queries/submissions:listVehicleSubmissions",
+  "queries/trips:getPricingAnalytics",
+  "queries/trips:getTeslaPricingAnalytics",
+  "queries/users:getFullProfile",
+  "queries/vehicles:getVehicleTimeline"
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "path": "/data/austin-av-incidents.json",
+    "cached": true,
+    "bytes": 21121
+  },
+  {
+    "path": "/data/av-hiring.json",
+    "cached": true,
+    "bytes": 141191
+  },
+  {
+    "path": "/data/az-mvd-summary.json",
+    "cached": true,
+    "bytes": 10683
+  },
+  {
+    "path": "/data/az-mvd-vehicles.json",
+    "cached": true,
+    "bytes": 108583
+  },
+  {
+    "path": "/data/ca-dmv-summary.json",
+    "cached": true,
+    "bytes": 4822
+  },
+  {
+    "path": "/data/ca-dmv-vehicles.json",
+    "cached": true,
+    "bytes": 266649
+  },
+  {
+    "path": "/data/population-coverage.json",
+    "cached": true,
+    "bytes": 30165
+  },
+  {
+    "path": "/data/population-grid.json",
+    "cached": true,
+    "bytes": 658723
+  },
+  {
+    "path": "/data/population-metro.json",
+    "cached": true,
+    "bytes": 3450
+  },
+  {
+    "path": "/data/robotaxi-weekly.json",
+    "cached": true,
+    "bytes": 14
+  },
+  {
+    "path": "/data/service-area-history.json",
+    "cached": true,
+    "bytes": 381120
+  },
+  {
+    "path": "/data/sf-311-av-complaints.json",
+    "cached": true,
+    "bytes": 11405
+  },
+  {
+    "path": "/data/sf-citations.json",
+    "cached": true,
+    "bytes": 39468
+  },
+  {
+    "path": "/data/tesla-robotaxi-fleet.json",
+    "cached": true,
+    "bytes": 36359
+  },
+  {
+    "path": "/data/tesla-robotaxi-miles-estimate.json",
+    "cached": true,
+    "bytes": 1970
+  },
+  {
+    "path": "/data/tesla-robotaxi-miles.json",
+    "cached": true,
+    "bytes": 3573
+  },
+  {
+    "path": "/data/texas-dmv-other-operators.json",
+    "cached": true,
+    "bytes": 1269
+  },
+  {
+    "path": "/data/us-fleet-estimates.json",
+    "cached": true,
+    "bytes": 9901
+  },
+  {
+    "path": "/data/waymo-miles-cells.json",
+    "cached": true,
+    "bytes": 102632
+  },
+  {
+    "path": "/data/waymo-miles.json",
+    "cached": true,
+    "bytes": 3339
+  }
+]

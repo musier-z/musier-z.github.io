@@ -1,0 +1,1 @@
+var e=`rtt.accountFlash`;function t(t){try{sessionStorage.setItem(e,JSON.stringify(t))}catch{}}function n(){try{let t=sessionStorage.getItem(e);return sessionStorage.removeItem(e),t?JSON.parse(t):null}catch{return null}}export{n,t};

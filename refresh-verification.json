@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-11-03T12:07:49.433Z",
+  "unitTests": {
+    "command": "python3 -m unittest -v test_refresh.py",
+    "passed": 23,
+    "failed": 0
+  },
+  "desktop": {
+    "blocked": 1,
+    "blockedBannerPresent": true,
+    "cacheHeader": "blocked",
+    "cachedRestrictedResponse": 200,
+    "desktopOverflow": false,
+    "dialogOpen": true,
+    "duplicateCoalesced": true,
+    "focusRestored": true,
+    "manualAccepted": true,
+    "manualJob": {
+      "blocked": 0,
+      "changed": 0,
+      "deferred": 0,
+      "done": 0,
+      "failed": 0,
+      "finishedAt": null,
+      "running": true,
+      "startedAt": "2026-11-03T12:06:31Z",
+      "total": 86,
+      "unchanged": 0
+    },
+    "missingActionHeaderDenied": true,
+    "payloadHasOriginalData": true,
+    "schedulerRunning": true,
+    "time": "2026-11-03T12:06:31.836Z",
+    "title": "车队数据与服务地图 | 无人驾驶出租车追踪",
+    "url": "http://127.0.0.1:8765/"
+  },
+  "mobile": {
+    "blockedNoticeVisible": true,
+    "dialogFits": true,
+    "focusRestored": true,
+    "pageOverflow": false,
+    "rows": 8,
+    "statusText": "自动更新已开启",
+    "tableScrolls": true,
+    "viewport": 390
+  },
+  "liveVerification": {
+    "successfullyCheckedRecordsAtSnapshot": 49,
+    "withDetectedChangesAtSnapshot": 31,
+    "latestSuccessfulCheckAtSnapshot": "2026-11-03T12:06:52Z",
+    "batchComplete": false,
+    "note": "整批手动检查已启动；网络超时保留缓存并重试，不将整批结果视为全部成功。"
+  },
+  "sourceRestriction": {
+    "path": "/v1/waymo-cameras?cameras=tally",
+    "status": 403,
+    "reason": "automated_client",
+    "action": "通过 blockedPaths 停止访问该路径；其他 401/403 响应也停止重试。"
+  }
+}

@@ -1,0 +1,7 @@
+__pycache__/
+*.log
+.DS_Store
+translations.tmp
+
+# 运行时数据缓存（可从上游重新抓取，不入版本库）
+cache/

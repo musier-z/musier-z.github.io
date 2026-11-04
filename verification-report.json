@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-03",
+  "publicRoutesInspected": 32,
+  "interactionChecks": {
+    "running": false,
+    "checks": [
+      {
+        "name": "按车牌搜索",
+        "pass": true,
+        "detail": [
+          "/vehicles/XFY5826"
+        ]
+      },
+      {
+        "name": "无匹配车辆提示",
+        "pass": true,
+        "detail": "车辆目录\n\n0 当前筛选范围内的在役车辆\n\n全部运营商\n全部地区\n最近发现\n\n未找到车辆\n\n尝试不同的提供商、区域或板块。"
+      },
+      {
+        "name": "切换运营商",
+        "pass": true,
+        "detail": "Waymo 车队\n位于\n每个城市"
+      },
+      {
+        "name": "账户功能提示",
+        "pass": true,
+        "detail": "前往原站使用账户功能\n\n这是 Robotaxi Tracker 的简体中文镜像。登录、注册与提交记录由原站处理，您的账户信息不会在此镜像中收集。\n\n前往原站继续浏览"
+      },
+      {
+        "name": "手机端宽度",
+        "pass": true,
+        "detail": {
+          "viewport": 390,
+          "width": 384
+        }
+      },
+      {
+        "name": "手机导航",
+        "pass": true,
+        "detail": "无人驾驶出租车追踪\n中文版\n登录"
+      },
+      {
+        "name": "地图画布",
+        "pass": true,
+        "detail": 1
+      },
+      {
+        "name": "地图缩放交互",
+        "pass": true,
+        "detail": {
+          "before": 10.269053946878435,
+          "after": 11.269053946878435
+        }
+      },
+      {
+        "name": "英里单位",
+        "pass": true,
+        "detail": "覆盖范围\n\n~3,748 平方英里 跨越 16 个城市\n\n特斯拉\nWaymo\nZoox\nAvride\n奥斯汀\n旧金山湾区\n丹佛\n拉斯维加斯\n洛杉矶\n迈阿密\n凤凰城\n圣安东尼奥\n圣迭戈\n坦帕\n亚特兰大\n达拉斯\n休斯敦\n纳什维尔\n奥兰多\n沃思堡\n公布\nWaymo 伦敦\n2026\nWaymo 华盛顿特区\n2026\nZoox 奥斯汀\n2026\nZoox 迈阿密\n2026\nWaymo 马德里\n2027\nWaymo 慕尼黑\n2027\nWaymo 东京\n2027\nZoox 洛杉矶\n2027年上半年\nWaymo 新加坡\n2028\nWaymo 多伦多\n2028\n特斯拉 杰克逊维尔\n还没有日期\n特斯拉 拉斯维加斯\n还没有日期\n特斯拉 凤凰城\n还没有日期\n特斯拉 圣安东尼奥\n还没有日期\nWaymo 巴尔的摩\n还没有日期\nWaymo 波士顿\n还没有日期\nWaymo 夏洛特\n还没有日期\nWaymo 芝加哥\n还没有日期\nWaymo 底特律\n还没有日期\nWaymo 迈阿密国际机场\n还没有日期\nWaymo 明尼阿波利斯"
+      }
+    ],
+    "completed": "2026-11-03T11:07:31.134Z"
+  },
+  "followupAudit": {
+    "completed": "2026-11-03T11:04:20.858Z",
+    "results": [
+      {
+        "brokenImages": [],
+        "characters": 1870,
+        "failedRequests": [],
+        "head": "无人驾驶出租车定价\n\n乘客实际支付的费用来自社区逐次记录的收据。\n\n10,999 付费乘车 ·2026 年 11 月 3 日更新\n\n30天\n90 天\n全部时间\n典型的骑行· 近 90 天\n特斯拉\n$8.95\n中位骑行\n每英里\n$4.51\n平均行程\n3.5 英里\n行程\n3,273\nWaymo\n$13.66\n中位骑行\n每英里\n$3.31\n平均行程\n6.6 英里\n行程\n497\n车费分布\n特斯拉\nWaym",
+        "overflow": false,
+        "path": "/pricing",
+        "title": "乘车价格 | 无人驾驶出租车追踪",
+        "untranslated": []
+      },
+      {
+        "brokenImages": [],
+        "characters": 1071,
+        "failedRequests": [],
+        "head": "排行榜\n\n为追踪器提供支持的社区成员：找到的车辆、记录的行程、骑行的里程。\n\nCybercab上线活动·乘车排行榜 →\n综合\n车辆\n行程\n英里\n全部时间\n本月\n本周\n整体贡献者最多\n50 排名\n1\nEthan McKanna\n@乙桑卡纳\n955\n2\n塞缪尔·斯诺\n@萨姆斯雪850\n803\n3\nLG\n@LG\n677\n4\n杰克逊·布拉茨\n@jksnrobotaxiatx\n647\n5\n亚历克斯·赖斯\n@",
+        "overflow": false,
+        "path": "/leaderboards",
+        "title": "贡献排行榜 | 无人驾驶出租车追踪",
+        "untranslated": []
+      },
+      {
+        "brokenImages": [],
+        "characters": 5465,
+        "failedRequests": [],
+        "head": "无人驾驶出租车新闻\n昨天\n特斯拉\n发射\n2026 年 11 月 2 日\n特斯拉无人出租车在沃思堡上线，进入得州第四座城市\n（打开 x.com 在新标签中）\n\n特斯拉 Robotaxi 官方账号表示，沃思堡乘车服务将于 11 月 2 日周一上午 6 时开放。公布的地图以市中心为核心，覆盖怀特塞特门特、本布鲁克和哈尔特姆城。这是特斯拉自 7 月以来新增的首座无人出租车运营城市，也是其第七座运营城市。特",
+        "overflow": false,
+        "path": "/news",
+        "title": "行业新闻 | 无人驾驶出租车追踪",
+        "untranslated": []
+      },
+      {
+        "brokenImages": [],
+        "characters": 2352,
+        "failedRequests": [],
+        "head": "X感悟·每日阅读\nX 对无人驾驶出租车的感受\n\n10 月 30 日星期五上午 8:15 – 11 月 2 日星期一上午 8:15（中部时间）\n73h 周末窗口\n·发表 08:35 计算机断层扫描\n\n11 月 2 日星期一\n最新\n\n特斯拉 线索特斯拉的周末属于它的万圣节特技，一辆无人驾驶的 Cybercab 在奥斯汀行驶，里面有骷髅，然后是车队的增长：得克萨斯州的注册量从 1,080 辆跃升至 1,",
+        "overflow": false,
+        "path": "/sentiment",
+        "title": "X 平台舆情 | 无人驾驶出租车追踪",
+        "untranslated": [
+          "Waymo："
+        ]
+      },
+      {
+        "brokenImages": [],
+        "characters": 2657,
+        "failedRequests": [],
+        "head": "概览\n美国车队\n事故报告\n城市事件\n加州行程\n旧金山停车罚单\n得州注册记录\n加州许可\n亚利桑那州注册记录\n亚利桑那州注册记录\n\n亚利桑那州账簿上的每辆 Waymo 和 Tesla Robotaxi 车辆均来自 MVD 公共记录：注册车队、Waymo 的车队备案、特斯拉的所有权和许可证。\n\n记录请求快照 · 2026年10月6日 · ADOT 机动车辆部门 ↗\n\nWaymo\n691\n已注册 I-PA",
+        "overflow": false,
+        "path": "/permits/arizona",
+        "title": "亚利桑那州注册记录 | 无人驾驶出租车追踪",
+        "untranslated": []
+      },
+      {
+        "brokenImages": [],
+        "characters": 2034,
+        "failedRequests": [],
+        "head": "概览\n美国车队\n事故报告\n城市事件\n加州行程\n旧金山停车罚单\n得州注册记录\n加州许可\n亚利桑那州注册记录\n城市事件报告\n\n向城市本身报告的无人驾驶出租车事件：奥斯汀的警察、消防、紧急医疗服务、学校警察、城市工作人员和居民的报告日志，以及旧金山的 311 居民投诉。\n\n奥斯汀\n旧金山\n奥斯汀\n\n警察、消防员、急救人员、学校警察、城市工作人员和居民以及相关公司向奥斯汀市报告的每一起无人驾驶出租车事件。",
+        "overflow": false,
+        "path": "/government/incidents",
+        "title": "城市事件 | 无人驾驶出租车追踪",
+        "untranslated": []
+      },
+      {
+        "brokenImages": [],
+        "characters": 1873,
+        "failedRequests": [],
+        "head": "Cybercab 发布会\n\n8 月 23 日之前乘坐 Tesla Robotaxi，有机会参加 Cybercab 发布会。更多乘车服务，更好的赔率。乘车服务必须在 8 月 23 日晚上 11:59（中部时间）之前完成；获奖者名单于 8 月 25 日上午 9 点（中部时间）公布。*\n\n比赛结束\n乘车服务不再符合资格。特斯拉表示，获奖者名单将于 8 月 25 日上午 9 点（中部时间）公布。\n特斯拉无",
+        "overflow": false,
+        "path": "/cybercab-event",
+        "title": "Cybercab 活动 | 无人驾驶出租车追踪",
+        "untranslated": []
+      }
+    ],
+    "running": false,
+    "started": "2026-11-03T11:02:08.585Z"
+  },
+  "phone": {
+    "text": "无人驾驶出租车追踪\n中文版\n登录\n特斯拉\n604\nWaymo\n>4,000\nZoox\n62\nAvride\n344 得州\n特斯拉 车队\n位于\n奥斯汀\n全部\n奥斯汀\n432\n达拉斯\n78\n休斯敦\n48\n坦帕\n25\n沃思堡\n8\n奥兰多\n8\n迈阿密\n5\n8\n运营中 · 无安全员\nⓘ\n432\n▲ 181\n近 30d\n432\n在奥斯汀发现\n801\n特斯拉官方查询收录\n1,244\n得州注册数量\n无安全员 · 480 辆累计追踪车辆\nCybercab 无人出租车\n▲ 166\n近 30d\n243\n56% 舰队\n→\n243\n已发现\n536\n官方查询\n573\nTxDMV\n已记录行程\n5,248\n来自 469 辆车\nModel Y\n82%\nCybercab\n18%\nCybercab摄像头发现 · 24 小时\n692\n1 辆当前位于画面内 · 84% 全无人\n赞助商\n自动驾驶配送平台\n奥斯汀服务覆盖\n特拉维斯县和威廉森县\nCybercab 检出记录 ·\n18:50\n展开地图\n面积\n居民\n就业岗位\n显示 Waymo\n服务区域\n272平方英里\n+8.0 平方英里 自 9月15日\n居民\n808K\n38% 占都会区比例\n就业岗位\n800K\n63% 占都会区比例\n每平方英里车辆数\n1.6\n每辆车对应居民数\n1,871\n奥斯汀机场\n未覆盖\n同城运营： 奥斯汀\nWaymo\n151 平方英里\n→\n特斯拉车费 · 奥斯汀\n价",
+    "viewport": 390,
+    "width": 384
+  }
+}

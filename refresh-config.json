@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "workers": 3,
+  "schedulerSeconds": 15,
+  "requestTimeoutSeconds": 25,
+  "retryBaseSeconds": 60,
+  "retryMaxSeconds": 3600,
+  "manualCooldownSeconds": 60,
+  "blockedPaths": ["/v1/waymo-cameras"],
+  "intervalsSeconds": {
+    "camera": 60,
+    "wait": 120,
+    "fleet": 300,
+    "news": 1800,
+    "hourly": 3600,
+    "history": 21600,
+    "geography": 86400,
+    "archive": 86400
+  }
+}

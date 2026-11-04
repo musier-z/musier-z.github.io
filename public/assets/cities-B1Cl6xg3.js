@@ -1,0 +1,1 @@
+function e(e){return e.toLowerCase().replace(/[^a-z]+/g,`-`).replace(/^-|-$/g,``)}function t(t){let n=new Map;for(let r of t){if(r.isTestRegion||r.serviceInfo?.status===`planned`||r.serviceInfo?.status===`suspended`)continue;let t=e(r.name),i=n.get(t)??{key:t,name:r.name,areas:[]};i.areas.push(r),n.set(t,i)}return[...n.values()]}export{t as n,e as t};

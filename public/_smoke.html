@@ -1,0 +1,21 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>交互验证</title><style>body{background:#111;color:#ddd;font:14px system-ui}iframe{border:0;width:1280px;height:900px}pre{white-space:pre-wrap}</style></head><body><pre id="out"></pre><iframe></iframe><script>
+window.smoke={running:false,checks:[]};
+const pause=ms=>new Promise(r=>setTimeout(r,ms));
+window.runSmoke=async()=>{
+ smoke.running=true;const f=document.querySelector('iframe');
+ const check=(name,pass,detail)=>{smoke.checks.push({name,pass,detail});document.querySelector('pre').textContent=JSON.stringify(smoke,null,2);};
+ const load=async(path)=>{f.src=path;await new Promise(r=>{f.onload=r;setTimeout(r,20000)});await pause(2500);};
+ await load('/vehicles');let d=f.contentDocument,w=f.contentWindow;
+ let input=d.querySelector('input[type="search"]');
+ if(input){const set=Object.getOwnPropertyDescriptor(w.HTMLInputElement.prototype,'value').set;set.call(input,'XFY5826');input.dispatchEvent(new w.Event('input',{bubbles:true}));await pause(1200);const links=[...d.querySelectorAll('main a[href^="/vehicles/"]')].map(a=>a.getAttribute('href'));check('按车牌搜索',links.length===1&&links[0].includes('XFY5826'),links);set.call(input,'ZZZ-NO-SUCH-PLATE');input.dispatchEvent(new w.Event('input',{bubbles:true}));await pause(700);check('无匹配车辆提示',!d.querySelector('main a[href^="/vehicles/"]'),d.querySelector('main')?.innerText.slice(0,250));}
+ else check('搜索框',false,'未找到搜索框');
+ await load('/');d=f.contentDocument;w=f.contentWindow;
+ const waymo=[...d.querySelectorAll('button')].find(b=>/^Waymo/.test(b.textContent));
+ if(waymo){waymo.click();await pause(2500);check('切换运营商',d.querySelector('h1')?.innerText.includes('Waymo'),d.querySelector('h1')?.innerText);}
+ const login=d.querySelector('header a[href="/signin"]');login?.click();await pause(200);check('账户功能提示',!!d.querySelector('[role="dialog"]'),d.querySelector('[role="dialog"]')?.innerText.slice(0,150));d.querySelector('.zh-original-dialog button')?.click();
+ f.style.width='390px';await pause(700);check('手机端宽度',d.documentElement.scrollWidth<=w.innerWidth+2,{viewport:w.innerWidth,width:d.documentElement.scrollWidth});check('手机导航',!!d.querySelector('nav'),d.querySelector('header')?.innerText);
+ f.style.width='1280px';await load('/map?city=austin');d=f.contentDocument;await pause(2000);check('地图画布',!!d.querySelector('canvas.maplibregl-canvas'),d.querySelectorAll('canvas').length);check('地图缩放控件',!!d.querySelector('.maplibregl-ctrl-zoom-in'),null);
+ check('英里单位',!d.querySelector('main')?.innerText.includes('米²')&&d.querySelector('main')?.innerText.includes('平方英里'),d.querySelector('main')?.innerText.slice(0,450));
+ smoke.running=false;smoke.completed=new Date().toISOString();document.querySelector('pre').textContent=JSON.stringify(smoke,null,2);
+};
+</script></body></html>

@@ -1,0 +1,16 @@
+:root{font-family:"Geist Variable","PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif!important}
+body{font-family:"Geist Variable","PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif}
+.font-display{font-family:"Geist Variable","PingFang SC","Microsoft YaHei",system-ui,sans-serif!important}
+#zh-loading{position:fixed;inset:0;z-index:9999;background:#0a0a0a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:#eee;font-family:system-ui,sans-serif;transition:opacity .2s}
+#zh-loading span{font-size:13px;color:#888}
+.zh-loader{width:30px;height:30px;border:2px solid #252525;border-top-color:#3b82f6;border-radius:50%;animation:zh-spin .8s linear infinite}
+@keyframes zh-spin{to{transform:rotate(360deg)}}
+.zh-source{max-width:1104px;margin:0 auto;padding:12px 0 0;font-size:11px;line-height:1.8;color:#8b8b8b;border-top:1px solid #242424}
+.zh-source a{color:#7ba7ff;text-decoration:none}
+.zh-source a:hover{text-decoration:underline}
+.zh-source-badge{font-size:10px!important;font-weight:500;padding:2px 5px;border:1px solid #2c4163;border-radius:4px;color:#86affb;background:#142039;white-space:nowrap;letter-spacing:.03em}
+.zh-original-dialog{position:fixed;inset:0;z-index:10000;background:#000b;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
+.zh-original-dialog section{width:min(440px,100%);padding:28px;border:1px solid #333;border-radius:16px;background:#141414;color:#eee;font-size:14px;line-height:1.85;box-shadow:0 16px 64px #0008}
+.zh-original-dialog h2{font-size:20px;font-weight:650;margin:0 0 12px}.zh-original-dialog p{color:#aaa;margin-bottom:24px}.zh-original-dialog a,.zh-original-dialog button{display:inline-flex;align-items:center;justify-content:center;border-radius:7px;padding:7px 16px;font-size:13px;cursor:pointer}.zh-original-dialog a{background:#2875f5;color:white;margin-right:10px}.zh-original-dialog button{background:#222;color:#ddd;border:1px solid #3a3a3a}
+@media(max-width:640px){.zh-source{padding:12px 0 0}.zh-source-badge{font-size:9px!important}header nav{gap:12px!important}}
+@media(prefers-reduced-motion:reduce){.zh-loader{animation:none}#zh-loading{transition:none}}

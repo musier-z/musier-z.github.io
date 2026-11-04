@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>中文网站页面验证</title><style>body{margin:30px;background:#101010;color:#ddd;font:14px system-ui}iframe{width:1280px;height:900px;border:1px solid #444}pre{white-space:pre-wrap}</style></head><body><h1>中文网站页面验证</h1><pre id="progress">准备中</pre><div id="frames"></div><script>
+window.auditReport={started:new Date().toISOString(),results:[],running:false};
+window.runAudit=async function(routes){
+ auditReport.running=true;
+ for(const path of routes){
+  const frame=document.createElement('iframe');frame.src=path;document.getElementById('frames').replaceChildren(frame);
+  await new Promise(resolve=>{frame.onload=resolve;setTimeout(resolve,20000)});
+  const began=Date.now();
+  while(Date.now()-began<16000){if(frame.contentWindow.__zh&&frame.contentDocument.querySelector('main'))break;await new Promise(r=>setTimeout(r,200));}
+  await new Promise(r=>setTimeout(r,15000));
+  let result;
+  try{
+   const w=frame.contentWindow,d=frame.contentDocument;
+   const missing=w.__zh?.audit()||[];
+   if(missing.length){try{const values=await w.__zh.translatePublicText(missing.slice(0,120));Object.assign(w.__zh.dictionary,values);await fetch('/__local/translation-cache',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(values)});w.__zh.walk();}catch(e){}}
+   result={path,title:d.title,characters:d.querySelector('main')?.innerText.length||0,head:d.querySelector('main')?.innerText.slice(0,200)||d.body.innerText.slice(0,200),untranslated:w.__zh?.audit().slice(0,12),brokenImages:[...d.images].filter(i=>i.complete&&!i.naturalWidth).map(i=>i.getAttribute('src')),overflow:d.documentElement.scrollWidth>w.innerWidth+2,failedRequests:w.performance.getEntriesByType('resource').filter(r=>r.responseStatus>=400).map(r=>({path:new URL(r.name).pathname,status:r.responseStatus})).filter(r=>!r.path.includes('/auth/'))};
+  }catch(e){result={path,error:String(e)}}
+  auditReport.results.push(result);document.getElementById('progress').textContent=JSON.stringify(auditReport,null,2);
+ }
+ auditReport.running=false;auditReport.completed=new Date().toISOString();document.getElementById('progress').textContent=JSON.stringify(auditReport,null,2);
+};
+</script></body></html>
