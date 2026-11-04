@@ -77,6 +77,17 @@ python3 server.py --port 8765
 
 修改术语优先编辑 `public/glossary.js`，然后更新 `index.html` 中的版本参数并刷新页面。`python3 extract_strings.py` 可重新提取公开界面的静态文字。需要检查原站新数据时，优先使用页面的「立即检查更新」。
 
+## GitHub Pages 静态版
+
+Pages 只能托管静态文件，所以 `.github/workflows/pages.yml` 在推送到 `main`、每小时定时（第 17 分）和手动触发时运行：先跑单元测试，再用 `build_static.py` 生成 `dist/` 并发布。
+
+- `build_static.py` 复用 `refresh.py` 的规则：只读公开接口，遵守 `blockedPaths`、401/403 停止、失败退避、ETag/304 和失败时保留旧副本；`cache/` 通过 Actions 缓存在两次运行间保留，不提交到仓库。
+- 要抓取的接口来自 `static-endpoints.json`（由 `tools/discover_endpoints.py` 对本地服务实际页面请求录制）以及前端包里引用的 `/data/*.json`。下一页、帖子详情和图片只从已抓取数据中出现的地址派生（有数量上限）。
+- `static-shim.js` 在浏览器中把前端的 `/v1/…`、`/data/…`、`/map-styles/…` 请求映射到 `data-snapshot/` 中的文件，并为项目子路径（如 `/robotaxi-tracker-zh/`）补全资源地址。
+- 本地预览：`python3 build_static.py --out dist --base /`，然后在 `dist/` 中启动任意静态文件服务。
+
+静态版的限制：数据最多约一小时更新一次（不是实时轮询），页面上没有「立即检查更新」；翻译缓存无法写回（浏览器内的机器翻译仍可用）；受原站限制的 Waymo 摄像头数据不可用；单车详情等未在快照中的页面和未快照的图片会提示前往原站或直接从原站加载；账户、登录和投稿功能请前往原站。
+
 ## 归属
 
 原站由 Ethan McKanna 创建。站点名称、运营商商标、图片和原站程序的权利归各自权利人所有；本项目保留原站及数据来源署名，并标记为简体中文镜像。

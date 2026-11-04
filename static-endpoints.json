@@ -1,0 +1,218 @@
+[
+  {
+    "path": "/data/austin-av-incidents.json",
+    "body": null
+  },
+  {
+    "path": "/data/av-hiring.json",
+    "body": null
+  },
+  {
+    "path": "/data/az-mvd-summary.json",
+    "body": null
+  },
+  {
+    "path": "/data/az-mvd-vehicles.json",
+    "body": null
+  },
+  {
+    "path": "/data/ca-dmv-plate-index.json",
+    "body": null
+  },
+  {
+    "path": "/data/ca-dmv-summary.json",
+    "body": null
+  },
+  {
+    "path": "/data/ca-dmv-vehicles.json",
+    "body": null
+  },
+  {
+    "path": "/data/population-coverage.json",
+    "body": null
+  },
+  {
+    "path": "/data/population-metro.json",
+    "body": null
+  },
+  {
+    "path": "/data/robotaxi-weekly.json",
+    "body": null
+  },
+  {
+    "path": "/data/service-area-history.json",
+    "body": null
+  },
+  {
+    "path": "/data/sf-311-av-complaints.json",
+    "body": null
+  },
+  {
+    "path": "/data/sf-citations.json",
+    "body": null
+  },
+  {
+    "path": "/data/tesla-robotaxi-fleet.json",
+    "body": null
+  },
+  {
+    "path": "/data/tesla-robotaxi-miles-estimate.json",
+    "body": null
+  },
+  {
+    "path": "/data/tesla-robotaxi-miles.json",
+    "body": null
+  },
+  {
+    "path": "/data/texas-dmv-other-operators.json",
+    "body": null
+  },
+  {
+    "path": "/data/us-fleet-estimates.json",
+    "body": null
+  },
+  {
+    "path": "/data/waymo-miles.json",
+    "body": null
+  },
+  {
+    "path": "/map-styles/openfreemap-dark.json",
+    "body": null
+  },
+  {
+    "path": "/v1/api/compat/query",
+    "body": "{\"name\":\"queries/leaderboards:getLeaderboard\",\"args\":{\"category\":\"overall\",\"timeframe\":\"all-time\",\"limit\":50}}"
+  },
+  {
+    "path": "/v1/api/compat/query",
+    "body": "{\"name\":\"queries/leaderboards:getLeaderboard\",\"args\":{\"category\":\"overall\",\"timeframe\":\"all-time\",\"limit\":8}}"
+  },
+  {
+    "path": "/v1/api/compat/query",
+    "body": "{\"name\":\"queries/trips:getPricingAnalytics\",\"args\":{\"provider\":\"avride\"}}"
+  },
+  {
+    "path": "/v1/api/compat/query",
+    "body": "{\"name\":\"queries/trips:getPricingAnalytics\",\"args\":{\"provider\":\"waymo\"}}"
+  },
+  {
+    "path": "/v1/api/compat/query",
+    "body": "{\"name\":\"queries/trips:getPricingAnalytics\",\"args\":{\"provider\":\"zoox\"}}"
+  },
+  {
+    "path": "/v1/api/compat/query",
+    "body": "{\"name\":\"queries/trips:getTeslaPricingAnalytics\",\"args\":{}}"
+  },
+  {
+    "path": "/v1/api/compat/vehicles?limit=5000&view=list",
+    "body": null
+  },
+  {
+    "path": "/v1/api/cpuc/waymo",
+    "body": null
+  },
+  {
+    "path": "/v1/api/events/cybercab-launch/leaderboard",
+    "body": null
+  },
+  {
+    "path": "/v1/api/leaderboards/cybercab",
+    "body": null
+  },
+  {
+    "path": "/v1/api/news-feed?limit=20",
+    "body": null
+  },
+  {
+    "path": "/v1/api/news-feed?limit=6",
+    "body": null
+  },
+  {
+    "path": "/v1/api/nhtsa/incidents",
+    "body": null
+  },
+  {
+    "path": "/v1/api/nhtsa/summary",
+    "body": null
+  },
+  {
+    "path": "/v1/api/service-areas?v=mw07owqn",
+    "body": null
+  },
+  {
+    "path": "/v1/api/texas-dmv",
+    "body": null
+  },
+  {
+    "path": "/v1/api/texas-dmv/vehicles",
+    "body": null
+  },
+  {
+    "path": "/v1/api/texas-dmv/version",
+    "body": null
+  },
+  {
+    "path": "/v1/api/texas-dmv/vins",
+    "body": null
+  },
+  {
+    "path": "/v1/api/wait-time/unified?provider=tesla",
+    "body": null
+  },
+  {
+    "path": "/v1/api/x-sentiment",
+    "body": null
+  },
+  {
+    "path": "/v1/api/x-sentiment/summary",
+    "body": null
+  },
+  {
+    "path": "/v1/camera-sightings",
+    "body": null
+  },
+  {
+    "path": "/v1/camera-sightings/timeline?kind=cybercab&market=austin",
+    "body": null
+  },
+  {
+    "path": "/v1/camera-sightings/timeline?market=austin",
+    "body": null
+  },
+  {
+    "path": "/v1/camera-sightings?kind=cybercab&market=austin",
+    "body": null
+  },
+  {
+    "path": "/v1/camera-sightings?kind=waymo&market=austin",
+    "body": null
+  },
+  {
+    "path": "/v1/camera-sightings?market=austin",
+    "body": null
+  },
+  {
+    "path": "/v1/cybercab-cameras/area-stats?window=7d",
+    "body": null
+  },
+  {
+    "path": "/v1/cybercab-cameras/hourly",
+    "body": null
+  },
+  {
+    "path": "/v1/cybercab-cameras?cameras=tally",
+    "body": null
+  },
+  {
+    "path": "/v1/waymo-cameras/area-stats?window=7d",
+    "body": null
+  },
+  {
+    "path": "/v1/waymo-cameras/hourly",
+    "body": null
+  },
+  {
+    "path": "/v1/waymo-cameras?cameras=tally",
+    "body": null
+  }
+]

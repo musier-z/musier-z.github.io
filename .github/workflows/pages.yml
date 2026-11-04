@@ -1,0 +1,56 @@
+name: Build and deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Hourly data snapshot (GitHub may delay scheduled runs by several minutes).
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests
+        run: python3 -m unittest -v test_refresh.py
+      # Keeps ETags, retry/backoff state and the last good copy between runs, so
+      # unchanged data is revalidated with 304s and a failing source keeps its
+      # previous snapshot instead of disappearing.
+      - name: Restore refresh cache
+        uses: actions/cache@v4
+        with:
+          path: cache
+          key: refresh-cache-${{ github.run_id }}
+          restore-keys: refresh-cache-
+      - id: pages
+        uses: actions/configure-pages@v5
+      - name: Build static snapshot
+        run: python3 build_static.py --out dist --base "${{ steps.pages.outputs.base_path }}/"
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
