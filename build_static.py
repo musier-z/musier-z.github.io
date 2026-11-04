@@ -7,7 +7,7 @@ fallback) to snapshot the public data the pinned frontend requests, then writes 
 self-contained site into --out. static-shim.js maps the frontend's /v1, /data and
 /map-styles requests onto the snapshot files at runtime.
 
-    python3 build_static.py --out dist --base /robotaxi-tracker-zh/
+    python3 build_static.py --out dist --base /
 
 Seed endpoints come from static-endpoints.json (recorded from the real frontend by
 tools/discover_endpoints.py) plus every /data/*.json referenced by the bundles.
