@@ -187,7 +187,54 @@ class RefreshTests(unittest.TestCase):
         self.wait_pending()
         self.assertEqual({}, self.calls[-1][2])
 
+    def test_camera_image_hash_paths_are_not_camera_category(self):
+        cases = [
+            '/v1/cybercab-cameras/images/' + 'a' * 64,
+            '/v1/waymo-cameras/images/' + 'b' * 64,
+            '/v1/avride-cameras/images/' + 'c' * 64,
+            '/v1/api/news-feed/images/' + 'd' * 64,
+        ]
+        for path in cases:
+            self.assertEqual((None, False), category(path))
+            self.assertEqual((None, False), category(path, kind='image/webp'))
+        self.assertEqual(('camera', True), category('/v1/camera-sightings'))
+        self.assertEqual(('camera', True), category('/v1/waymo-cameras?cameras=tally'))
+        self.assertEqual(('fleet', True), category('/v1/camera-sightings/timeline'))
+
+    def test_prune_failed_misses_keeps_bodied_failures(self):
+        self.response = TimeoutError('offline')
+        with self.assertRaises(ValueError):
+            self.cache.get('/v1/camera-sightings')
+        self.assertEqual(1, self.cache.status()['failed'])
+        # Cold miss: no body — pruned.
+        self.assertEqual(1, self.cache.prune_failed_misses())
+        self.assertEqual(0, self.cache.status()['failed'])
+        self.assertEqual(0, len(self.cache.entries))
+        # Seed a success, then fail while keeping body — not pruned.
+        self.response = (200, b'{"items":[1]}', {'Content-Type': 'application/json'})
+        self.cache.get('/v1/camera-sightings')
+        self.now += 61
+        self.response = TimeoutError('offline')
+        self.cache.get('/v1/camera-sightings')
+        self.wait_pending()
+        self.assertEqual(1, self.cache.status()['failed'])
+        self.assertTrue(self.cache.status()['records'][0]['hasCache'])
+        self.assertEqual(0, self.cache.prune_failed_misses())
+        self.assertEqual(1, self.cache.status()['failed'])
+
+    def test_status_can_filter_to_snapshot_keys(self):
+        self.cache.get('/v1/camera-sightings')
+        other = '/v1/camera-sightings?kind=waymo'
+        self.cache.get(other)
+        all_keys = list(self.cache.entries)
+        self.assertEqual(2, self.cache.status()['total'])
+        keep = {all_keys[0]}
+        filtered = self.cache.status(keys=keep)
+        self.assertEqual(1, filtered['total'])
+        self.assertEqual([all_keys[0]], [r['key'] for r in filtered['records']])
+
     def test_known_cache_busters_only_are_ignored(self):
+
         self.assertEqual(identity('/v1/api/service-areas?v=old')[2], identity('/v1/api/service-areas?v=new')[2])
         self.assertEqual(identity('/v1/api/texas-dmv/vins?version=a')[2], identity('/v1/api/texas-dmv/vins?version=b')[2])
         self.assertNotEqual(identity('/v1/camera-sightings?kind=waymo')[2], identity('/v1/camera-sightings?kind=zoox')[2])

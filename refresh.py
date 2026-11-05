@@ -4,6 +4,7 @@ One manager/server process owns a cache directory. Metadata atomically points to
 a complete payload, so an interrupted update cannot destroy the last good copy.
 """
 import concurrent.futures
+import re
 import hashlib
 import json
 import os
@@ -66,7 +67,13 @@ def category(path, body=None, kind=''):
     parts = urllib.parse.urlsplit(path)
     p = parts.path
     query = dict(urllib.parse.parse_qsl(parts.query))
-    if kind.startswith('image/') or p.startswith('/vehicles/web/') or p.endswith(('.webp', '.jpg', '.jpeg', '.png', '.svg', '.avif', '.gif', '.ico')):
+    # Hash image paths have no file extension; treat them as images even on cold
+    # failures where content-type is still unknown, so they never inflate the
+    # "camera" retry counters in status().
+    if (kind.startswith('image/') or p.startswith('/vehicles/web/')
+            or p.endswith(('.webp', '.jpg', '.jpeg', '.png', '.svg', '.avif', '.gif', '.ico'))
+            or re.search(r'-cameras/images/[0-9a-f]{64}$', p)
+            or re.search(r'/v1/api/news-feed/images/[0-9a-f]{64}$', p)):
         return None, False
     if not p.startswith(('/v1/', '/data/', '/map-styles/')):
         return None, False
@@ -427,15 +434,44 @@ class RefreshCache:
         self.manual_thread.start()
         return self.job.copy(), True
 
-    def status(self):
+    def prune_failed_misses(self):
+        """Drop failure-only metadata with no cached body (cold misses).
+
+        Keeps the last good payload when one exists. Used by the static builder
+        so orphan 429 image metas from earlier runs do not linger in Actions cache.
+        """
+        removed = 0
+        with self.lock:
+            for key, meta in list(self.entries.items()):
+                if not meta.get('failures'):
+                    continue
+                body = meta.get('bodyFile')
+                if body and (self.directory / body).is_file():
+                    continue
+                meta_name = meta.get('_metaFile') or (key + '.json')
+                for name in (meta_name, body):
+                    if not name:
+                        continue
+                    try:
+                        (self.directory / name).unlink()
+                    except OSError:
+                        pass
+                self.entries.pop(key, None)
+                removed += 1
+        return removed
+
+    def status(self, keys=None):
         with self.lock:
             groups = {k: {'id': k, 'label': name, 'intervalSeconds': self.config['intervalsSeconds'][k],
                           'total': 0, 'stale': 0, 'failed': 0, 'blocked': 0, 'refreshing': 0,
                           'oldestCheckedAt': None, 'latestCheckedAt': None, 'nextCheckAt': None,
                           'nextRetryAt': None, 'failureReasons': []}
                       for k, name in LABELS.items()}
+            allow = set(keys) if keys is not None else None
             records = []
             for key, meta in self.entries.items():
+                if allow is not None and key not in allow:
+                    continue
                 group, background, ttl = self.policy(meta)
                 if not group:
                     continue

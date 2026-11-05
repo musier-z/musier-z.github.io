@@ -121,6 +121,9 @@ class Snapshot:
         return item
 
     def run(self, seeds, max_pages, max_images):
+        removed = self.cache.prune_failed_misses()
+        if removed:
+            print('pruned', removed, 'failed cache misses without body', flush=True)
         pool = concurrent.futures.ThreadPoolExecutor(max_workers=self.config['workers'])
         def batch(items):
             return [r for r in pool.map(lambda e: (e, self.fetch(*e)), items)]
@@ -150,12 +153,27 @@ class Snapshot:
                 if not item:
                     break
         # Images referenced by the snapshot (latest first, bounded).
+        # Fetch with fewer workers and stop early on a 429 streak so one rate-limit
+        # wave does not leave hundreds of failure-only metas in the Actions cache.
         images = []
         for data, meta, _, _ in list(self.results.values()):
             if 'json' in meta.get('contentType', ''):
                 images += IMAGE_RE.findall(data.decode('utf-8', 'replace'))
         images = list(dict.fromkeys(images))[:max_images]
-        batch([(p, None) for p in images])
+        consecutive_429 = 0
+        for path in images:
+            item = self.fetch(path)
+            err = ''
+            with self.cache.lock:
+                meta = self.cache.entries.get(identity(path)[2], {})
+                err = meta.get('lastError') or ''
+            if 'HTTP 429' in err and not (item and item[0]):
+                consecutive_429 += 1
+                if consecutive_429 >= 5:
+                    print('  !  stopping image fetch after repeated HTTP 429', flush=True)
+                    break
+            else:
+                consecutive_429 = 0
         pool.shutdown()
 
 
@@ -207,7 +225,10 @@ def write_site(out, base, snap):
         entries[ckey] = {'f': name, 't': kind, 'k': key, 's': headers['X-Mirror-Cache'],
                          'c': headers['X-Mirror-Checked-At'], 'm': headers['X-Mirror-Changed-At']}
     built = timestamp()
-    status = snap.cache.status()
+    # Only report keys actually published in this snapshot; orphan failure metas
+    # left in the Actions cache must not inflate "等待重试" on the static panel.
+    snapshot_keys = {key for _, _, key, _ in snap.results.values()}
+    status = snap.cache.status(keys=snapshot_keys)
     hourly = 3600
     for group in status.get('groups', []):
         group['intervalSeconds'] = max(group['intervalSeconds'], hourly)
