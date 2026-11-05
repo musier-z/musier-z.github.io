@@ -161,7 +161,20 @@ class Snapshot:
                 images += IMAGE_RE.findall(data.decode('utf-8', 'replace'))
         images = list(dict.fromkeys(images))[:max_images]
         consecutive_429 = 0
+        stopped = False
         for path in images:
+            if stopped:
+                # Still publish images already in the Actions cache; do not hit origin.
+                path_n, body_n, key = identity(path)
+                with self.cache.lock:
+                    meta = self.cache.entries.get(key)
+                    if not meta or not meta.get('bodyFile'):
+                        continue
+                    data = (self.cache.directory / meta['bodyFile']).read_bytes()
+                    item = (data, dict(meta), key, self.cache.headers(key, meta))
+                self.results[canonical_key(path)] = item
+                self.stats['reused'] += 1
+                continue
             item = self.fetch(path)
             err = ''
             with self.cache.lock:
@@ -170,8 +183,8 @@ class Snapshot:
             if 'HTTP 429' in err and not (item and item[0]):
                 consecutive_429 += 1
                 if consecutive_429 >= 5:
-                    print('  !  stopping image fetch after repeated HTTP 429', flush=True)
-                    break
+                    print('  !  stopping origin image fetch after repeated HTTP 429; keeping cached images', flush=True)
+                    stopped = True
             else:
                 consecutive_429 = 0
         pool.shutdown()
